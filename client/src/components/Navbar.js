@@ -10,7 +10,7 @@ const Navbar = () => {
                 <span className="text-slate-700">Estate</span>
             </h1>
 
-            <form className='flex items-center justify-between bg-slate-100 rounded-lg p-3 w-40 sm:w-80'>
+            <form className='flex items-center justify-between bg-slate-100 rounded-lg p-2 sm:p-3 w-32 sm:w-80'>
                 <input type="search" placeholder="Search..." className='bg-transparent focus:outline-none' />
                 <FaSearch/>
             </form>
