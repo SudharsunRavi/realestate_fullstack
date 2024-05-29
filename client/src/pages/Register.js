@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
+import OAuth from "../components/OAuth"
 
 const Register = () => {
   const [formData, setFormData]=useState({})
@@ -32,7 +33,8 @@ const Register = () => {
         <input type="email" placeholder="Email" className="border rounded-lg px-3 py-2 focus:outline-none w-52 sm:w-72" id="email"onChange={handleData} autoComplete="off"/>
         <input type="password" placeholder="Password" className="border rounded-lg px-3 py-2 focus:outline-none w-52 sm:w-72" id="password" onChange={handleData} autoComplete="off"/>
         <input type="password" placeholder="Confirm Password" className="border rounded-lg px-3 py-2 focus:outline-none w-52 sm:w-72" autoComplete="off"/>
-        <button className="bg-slate-600 text-white py-2 px-5 rounded-lg hover:bg-slate-700 disabled:opacity-80">SIGN UP</button>
+        <button className="bg-slate-600 text-white py-2 px-5 rounded-lg hover:bg-slate-700 disabled:opacity-80 w-72">SIGN UP</button>
+        <OAuth/>
       </form>
 
       <div>
