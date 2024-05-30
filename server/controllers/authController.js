@@ -53,7 +53,7 @@ const googleLogin=async(req,res,next)=>{
                 avatar: req.body.photo,
             });
             await newUser.save();
-            const token=jwt.sign({id: user._id}, process.env.JWT_SECRET, {expiresIn: "30d"});
+            const token=jwt.sign({id: user?._id}, process.env.JWT_SECRET, {expiresIn: "30d"});
             const {password: userPassword, ...information} = user._doc;
             res.cookie("token", token, {httpOnly: true}).status(200).json(information);
         }
@@ -61,6 +61,15 @@ const googleLogin=async(req,res,next)=>{
         next(error);
     }
 }
+
+const logout=(req,res)=>{
+    try {
+        res.clearCookie("token")
+        res.status(200).json({message: "User has been logged out"});   
+    } catch (error) {
+        next(error);
+    }
+}
     
 
-module.exports={regsiter, login, googleLogin}
+module.exports={regsiter, login, googleLogin, logout}

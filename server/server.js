@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv').config();
+const cookieParser = require('cookie-parser');
 
 const userRouter=require('./routes/userRoutes');
 const authRouter=require('./routes/authRoutes');
@@ -15,9 +16,10 @@ mongoose.connect(process.env.MONGO_CONNECTION)
     });
 
 app.use(express.json());
+app.use(cookieParser());
 
 app.use((err, req, res, next)=>{
-    const statusCode = res.statusCode || 500;
+    const statusCode = err.statusCode || 500;
     const message = err.message || 'Internal Server Error';
     return res.status(statusCode).json({
         success: false,
