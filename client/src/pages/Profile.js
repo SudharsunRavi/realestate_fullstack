@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { app } from "../firebase";
 import { updatedUser } from "../redux/userSlice";
@@ -171,6 +171,8 @@ const Profile = () => {
         <button className="bg-slate-700 text-white rounded-lg px-3 py-2 uppercase hover:opacity-95 disabled:opacity-80 w-52 self-center mt-3">
           Update
         </button>
+
+        <Link to="/create-listing" className="bg-slate-700 text-white rounded-lg px-3 py-2 uppercase hover:opacity-95 disabled:opacity-80 w-52 text-center self-center mt-2">CREATE LISTING</Link>
       </form>
 
       <div className="flex flex-col justify-center items-center mt-5">

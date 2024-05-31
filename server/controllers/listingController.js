@@ -1,0 +1,15 @@
+const Listing  = require("../models/listingModel");
+
+const createListing = async (req, res, next) => {
+    try {
+        const listing=await Listing.create(req.body);
+        return res.status(201).json({
+            success: true,
+            listing
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
+module.exports = { createListing };

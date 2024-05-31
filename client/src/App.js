@@ -1,11 +1,13 @@
 import {createBrowserRouter, Outlet, RouterProvider} from 'react-router-dom'
 
+import ProtectedRoute from './ProtectedRoute';
 import Home from './pages/Home';
 import About from './pages/About';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Register from './pages/Register';
 import Navbar from './components/Navbar';
+import CreateListing from './pages/CreateListing';
 
 const AppLayout=()=>{
   return (
@@ -39,7 +41,19 @@ const appRouter=createBrowserRouter([
       },
       {
         path:'/profile',
-        element:<Profile/>
+        element: (
+                  <ProtectedRoute>
+                    <Profile/>
+                  </ProtectedRoute>
+                )
+      },
+      {
+        path:"/create-listing",
+        element:( 
+                <ProtectedRoute>
+                  <CreateListing/>
+                </ProtectedRoute>
+              )
       }
     ]
   }

@@ -57,7 +57,7 @@ const Login = () => {
           onChange={handleData}
           autoComplete="off"
         />
-        <button className="bg-slate-600 text-white py-2 px-5 rounded-lg hover:bg-slate-700 disabled:opacity-80 w-72">
+        <button className="bg-slate-600 text-white py-2 px-5 rounded-lg hover:bg-slate-700 disabled:opacity-80 w-52 sm:w-72">
           LOGIN
         </button>
         <OAuth/>

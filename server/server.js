@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 
 const userRouter=require('./routes/userRoutes');
 const authRouter=require('./routes/authRoutes');
+const listingRouter=require('./routes/listingRoutes');
 
 const app = express();
 mongoose.connect(process.env.MONGO_CONNECTION)
@@ -30,6 +31,7 @@ app.use((err, req, res, next)=>{
 
 app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
+app.use('/api/listing', listingRouter)
 
 app.listen(5000, ()=>{
     console.log('Server is running on port 5000');

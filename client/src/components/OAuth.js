@@ -35,7 +35,7 @@ const OAuth = () => {
 
   return (
     <div>
-        <button type="button" className="bg-slate-800 text-white py-2 px-5 rounded-lg hover:bg-slate-900 disabled:opacity-80 w-72" onClick={handleClick}>CONTINUE WITH GOOGLE</button>
+        <button type="button" className="bg-slate-800 text-white py-2 px-5 rounded-lg hover:bg-slate-900 disabled:opacity-80 w-52 text-sm sm:w-72 sm:text-lg" onClick={handleClick}>CONTINUE WITH GOOGLE</button>
     </div>
   )
 }
