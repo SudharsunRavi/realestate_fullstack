@@ -18,7 +18,7 @@ const Profile = () => {
     username: currentUser?.username,
     email: currentUser?.email,
     avatar: currentUser?.avatar,
-    password: "",
+    password: currentUser?.password,
   });
 
   const handlePhotoUpload = (photo) => {
