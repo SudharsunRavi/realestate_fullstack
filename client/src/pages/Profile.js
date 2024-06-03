@@ -115,7 +115,6 @@ const Profile = () => {
       dispatch(updatedUser(error.message));
     }
   }
-  
 
   return (
     <div className="p-3 max-w-lg mx-auto">
@@ -173,6 +172,8 @@ const Profile = () => {
         </button>
 
         <Link to="/create-listing" className="bg-slate-700 text-white rounded-lg px-3 py-2 uppercase hover:opacity-95 disabled:opacity-80 w-52 text-center self-center mt-2">CREATE LISTING</Link>
+      
+        <Link to="/user-listing" className="bg-slate-700 text-white rounded-lg px-3 py-2 uppercase hover:opacity-95 disabled:opacity-80 w-52 text-center self-center mt-2">SHOW LISTINGS</Link>        
       </form>
 
       <div className="flex flex-col justify-center items-center mt-5">
@@ -180,6 +181,7 @@ const Profile = () => {
 
         <span className="text-red-700 cursor-pointer hover:underline mt-3" onClick={handleSignOut}>Sign out</span>
       </div>
+      
     </div>
   );
 };

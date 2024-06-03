@@ -1,6 +1,7 @@
 const { errorHandler } = require("../middlewares/error");
 const bcryptjs=require('bcryptjs');
 const User = require("../models/userModel");
+const Listing = require("../models/listingModel");
 
 const updateUser=async(req,res)=>{
     const {id}=req.params;
@@ -37,5 +38,16 @@ const deleteUser=async(req,res)=>{
     }
 }
 
-module.exports={updateUser, deleteUser}
+const userListing=async(req,res)=>{
+    const {id}=req.params;
+    if(req.user.id!==id) return errorHandler(403,'You are not allowed to view other users profile');
+    try{
+        const listing=await Listing.find({userRef:id});
+        return res.status(200).json(listing);
+    }catch(error){
+        return errorHandler(500,error.message);
+    }
+}
+
+module.exports={updateUser, deleteUser, userListing}
 

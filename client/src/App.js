@@ -8,6 +8,7 @@ import Profile from './pages/Profile';
 import Register from './pages/Register';
 import Navbar from './components/Navbar';
 import CreateListing from './pages/CreateListing';
+import UserListing from './pages/UserListings';
 
 const AppLayout=()=>{
   return (
@@ -52,6 +53,14 @@ const appRouter=createBrowserRouter([
         element:( 
                 <ProtectedRoute>
                   <CreateListing/>
+                </ProtectedRoute>
+              )
+      },
+      {
+        path:"/user-listing",
+        element:( 
+                <ProtectedRoute>
+                  <UserListing/>
                 </ProtectedRoute>
               )
       }
