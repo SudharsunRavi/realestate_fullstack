@@ -1,11 +1,11 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { app } from '../firebase'
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage'
 
-const CreateListing = () => {
-
+const UpdateListing = () => {
+  const {listingId}= useParams();  
   const navigate=useNavigate();
   const [images, setImages] = useState([])
   const [uploadingImages, setUploadingImages] = useState(false)
@@ -114,8 +114,8 @@ const CreateListing = () => {
       if (formData.regularPrice < formData.discountPrice) return setError('Offer price should be less than regular price');
     
       //console.log(formData);
-      const res = await fetch('/api/listing/create', { 
-        method: 'POST',
+      const res = await fetch(`/api/listing/update/${listingId}`, { 
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -129,19 +129,35 @@ const CreateListing = () => {
       }
   
       const data = await res.json();
-      console.log(data)
-      navigate(`/listing/${data.listing._id}`);
+      //console.log(data.updatedListing)
+      navigate(`/listing/${data.updatedListing._id}`);
       if (data.success === false) setError(data.message);
     } catch (error) {
       console.log(error);
       setError(error.message);
     }
   };
+
+  useEffect(() => {
+    const fetchListing = async () => {
+        try {
+            const res = await fetch(`/api/listing/getListing/${listingId}`, {
+            method: 'GET'
+            })
+            const data = await res.json()
+            setFormData(data)
+        } catch (error) {
+            console.error('Error fetching listing:', error)
+        }
+    }
+
+    fetchListing()
+  }, []);
   
 
   return (
     <main className="p-3 max-w-4xl mx-auto">
-      <h1 className="text-2xl sm:text-3xl font-bold text-center my-10">Create a new listing</h1>
+      <h1 className="text-2xl sm:text-3xl font-bold text-center my-10">Update listing</h1>
 
       <form className="flex flex-col sm:flex-row gap-5" onSubmit={handleSubmit}>
         <div className="flex flex-col flex-1 gap-4">
@@ -212,7 +228,7 @@ const CreateListing = () => {
           </p>
 
           <div className="flex gap-4 items-center mt-2">
-            <input type="file" accept="image/*" id="images" multiple className="border rounded-lg w-full p-3 focus:outline-none" required autoComplete="off" onChange={(e) => setImages(e.target.files)} />
+            <input type="file" accept="image/*" id="images" multiple className="border rounded-lg w-full p-3 focus:outline-none" autoComplete="off" onChange={(e) => setImages(e.target.files)} />
             <button type="button" disabled={uploadingImages} className="bg-slate-600 text-white p-3 rounded-lg hover:bg-slate-700" onClick={handleImageSubmit}>{uploadingImages ? "Uploading..." : "UPLOAD"}</button>
           </div>
 
@@ -229,7 +245,7 @@ const CreateListing = () => {
             </div>
           }
 
-          <button className="p-3 bg-slate-600 text-white rounded-lg hover:opacity-90 mt-3 sm:mt-5">CREATE LISTING</button>
+          <button className="p-3 bg-slate-600 text-white rounded-lg hover:opacity-90 mt-3 sm:mt-5">UPDATE LISTING</button>
           {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
         </div>
       </form>
@@ -237,4 +253,4 @@ const CreateListing = () => {
   )
 }
 
-export default CreateListing
+export default UpdateListing

@@ -31,7 +31,6 @@ const UserListing = () => {
             const data = await res.json();
             //console.log(data)
             handleShowListings();
-            navigate('/user-listing');
         } catch (error) {
             console.log(error.message)
         }
@@ -47,8 +46,8 @@ const UserListing = () => {
             <h1 className="text-2xl sm:text-3xl font-bold text-center my-10">Your Listings</h1>
             {listings.map((listing) => (
                 <div key={listing._id} className="border border-gray-300 p-3 my-3 max-w-4xl mx-auto">
-                    <Link to={`/listing/${listing._id}`}>
-                        <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between">
+                        {/* <Link to={`/listing/${listing._id}`}> */}
                             <div className="flex items-center gap-8">
                                 <img src={listing.imageURLs[0]} alt={listing?.name} className="w-40 h-40 object-contain" />
                                 <div>
@@ -56,12 +55,14 @@ const UserListing = () => {
                                     <p className="text-gray-500">{listing?.description}</p>
                                 </div>
                             </div>
+                        {/* </Link> */}
                             <div className="flex flex-col gap-3">
                                 <button className="bg-red-500 text-white px-3 py-1 rounded hover:underline" onClick={()=>handleDeleteListing(listing._id)}>Delete</button>
-                                <button className="bg-blue-500 text-white px-3 py-1 rounded hover:underline" >Edit</button>
+                                <Link to={`/update-listing/${listing._id}`}>
+                                    <button className="bg-blue-500 text-white px-3 py-1 rounded hover:underline" >Edit</button>
+                                </Link>
                             </div>
-                        </div>
-                    </Link>
+                    </div>
                 </div>
             ))}
         </div>

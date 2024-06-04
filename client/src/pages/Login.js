@@ -29,6 +29,7 @@ const Login = () => {
         dispatch(login(data));
         navigate("/");
       } else {
+        alert("Login failed. Invalid credientials.");
         console.error("Login failed:", data.error); 
       }
     } catch (error) {

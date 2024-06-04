@@ -61,10 +61,9 @@ const Profile = () => {
   };
 
   const handleSubmit=async(e) => {
-    
     e.preventDefault();
     try {
-      console.log("clicked")
+      //console.log("clicked")
       const res=await fetch(`/api/user/update/${currentUser._id}`, {
         method: "POST",
         headers: {"Content-Type": "application/json",},
