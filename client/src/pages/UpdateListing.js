@@ -152,7 +152,7 @@ const UpdateListing = () => {
     }
 
     fetchListing()
-  }, []);
+  }, [listingId]);
   
 
   return (

@@ -17,6 +17,7 @@
     "react-router-dom": "^6.23.1",
     "react-scripts": "5.0.1",
     "redux-persist": "^6.0.0",
+    "swiper": "^11.1.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -45,7 +46,9 @@
     ]
   },
   "react-dotenv": {
-    "whitelist": ["API_URL"]
+    "whitelist": [
+      "API_URL"
+    ]
   },
   "devDependencies": {
     "dotenv": "^16.4.5",

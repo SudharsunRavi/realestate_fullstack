@@ -14,7 +14,7 @@ const UserListing = () => {
             });
             const data = await res.json();
             setListings(data); 
-            console.log(data)
+            //console.log(data)
         } catch (error) {
             console.log(error.message)
         }
@@ -47,7 +47,7 @@ const UserListing = () => {
             {listings.map((listing) => (
                 <div key={listing._id} className="border border-gray-300 p-3 my-3 max-w-4xl mx-auto">
                     <div className="flex items-center justify-between">
-                        {/* <Link to={`/listing/${listing._id}`}> */}
+                        <Link to={`/listing/${listing._id}`}>
                             <div className="flex items-center gap-8">
                                 <img src={listing.imageURLs[0]} alt={listing?.name} className="w-40 h-40 object-contain" />
                                 <div>
@@ -55,7 +55,7 @@ const UserListing = () => {
                                     <p className="text-gray-500">{listing?.description}</p>
                                 </div>
                             </div>
-                        {/* </Link> */}
+                        </Link>
                             <div className="flex flex-col gap-3">
                                 <button className="bg-red-500 text-white px-3 py-1 rounded hover:underline" onClick={()=>handleDeleteListing(listing._id)}>Delete</button>
                                 <Link to={`/update-listing/${listing._id}`}>

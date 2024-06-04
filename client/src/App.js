@@ -10,6 +10,7 @@ import Navbar from './components/Navbar';
 import CreateListing from './pages/CreateListing';
 import UserListing from './pages/UserListings';
 import UpdateListing from './pages/UpdateListing';
+import Listing from './pages/Listing';
 
 const AppLayout=()=>{
   return (
@@ -72,7 +73,11 @@ const appRouter=createBrowserRouter([
                   <UpdateListing/>
                 </ProtectedRoute>
               )
-      }
+      },
+      {
+        path:"/listing/:listingId",
+        element:<Listing/>
+      },
     ]
   }
 ])
