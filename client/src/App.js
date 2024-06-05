@@ -11,6 +11,7 @@ import CreateListing from './pages/CreateListing';
 import UserListing from './pages/UserListings';
 import UpdateListing from './pages/UpdateListing';
 import Listing from './pages/Listing';
+import Search from './pages/Search';
 
 const AppLayout=()=>{
   return (
@@ -77,6 +78,10 @@ const appRouter=createBrowserRouter([
       {
         path:"/listing/:listingId",
         element:<Listing/>
+      },
+      {
+        path:"/search",
+        element:<Search/>
       },
     ]
   }
