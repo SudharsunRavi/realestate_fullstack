@@ -5,23 +5,23 @@ import { useEffect, useState } from 'react';
 
 const Navbar = () => {
     const currentUser = useSelector((state) => state.user.currentUser);
-    const [searchTerm, setSearchTerm] = useState('');
+    const [search, setSearch] = useState('');
     const navigate = useNavigate();
     
 
     const handleSearchSubmit = (e) => {
         e.preventDefault();
         const urlSearchParam = new URLSearchParams(window.location.search);
-        urlSearchParam.set('searchTerm', searchTerm);
+        urlSearchParam.set('search', search);
         const searchQuery = urlSearchParam.toString();
         navigate(`/search?${searchQuery}`);
     }
 
     useEffect(()=>{
         const urlSearchParam = new URLSearchParams(window.location.search);
-        const searchTermFromURL = urlSearchParam.get('searchTerm');
+        const searchTermFromURL = urlSearchParam.get('search');
         if(searchTermFromURL){
-            setSearchTerm(searchTermFromURL);
+            setSearch(searchTermFromURL);
         }
     }, [window.location.search])
 
@@ -34,7 +34,7 @@ const Navbar = () => {
             </h1>
 
             <form className='flex items-center justify-between bg-slate-100 rounded-lg p-2 sm:p-3 w-32 sm:w-80' onSubmit={handleSearchSubmit}>
-                <input type="text" placeholder="Search..." className='bg-transparent focus:outline-none' value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)} />
+                <input type="text" placeholder="Search..." className='bg-transparent focus:outline-none' value={search} onChange={(e)=>setSearch(e.target.value)} />
                 <button>
                     <FaSearch/>
                 </button>

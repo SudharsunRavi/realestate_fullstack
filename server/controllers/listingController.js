@@ -80,12 +80,12 @@ const getAllListings = async (req, res, next) => {
         type = { $in: ['sale', 'rent'] };
       }
   
-      const searchTerm = req.query.searchTerm || '';
+      const search = req.query.search || '';
       const sort = req.query.sort || 'createdAt';
       const order = req.query.order || 'desc';
   
       const listings = await Listing.find({
-        name: { $regex: searchTerm, $options: 'i' },
+        name: { $regex: search, $options: 'i' },
         offer,
         furnished,
         parking,
