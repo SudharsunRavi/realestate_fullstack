@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 const Search = () => {
 
     const navigate=useNavigate();
+    const [showMore, setShowMore] = useState(false);
     const [listings, setListings] = useState([]);
     const [filterData, setFilterData] = useState(
         {
@@ -77,9 +78,12 @@ const Search = () => {
         }
 
         const fetchAllListing=async()=>{
+            setShowMore(false);
             const searchQuery=urlSearchParams.toString();
             const res=await fetch(`/api/listing/getListings?${searchQuery}`);
             const data=await res.json();
+            if(data.length>8) setShowMore(true);
+            else setShowMore(false);
             setListings(data);
         }
 
@@ -87,7 +91,21 @@ const Search = () => {
 
     }, [window.location.search])
 
-    console.log(listings)
+    //console.log(listings)
+
+    const onShowMore = async () => {
+        const numberOfListings = listings.length;
+        const startIndex = numberOfListings;
+        const urlParams = new URLSearchParams(window.location.search);
+        urlParams.set('startIndex', startIndex);
+        const searchQuery = urlParams.toString();
+        const res = await fetch(`/api/listing/getListings?${searchQuery}`);
+        const data = await res.json();
+        if (data.length < 9) {
+          setShowMore(false);
+        }
+        setListings([...listings, ...data]);
+      };
 
   return (
     <div className="flex flex-col md:flex-row">
@@ -150,7 +168,7 @@ const Search = () => {
 
         <div className="py-5 px-3">
             <h1 className="font-semibold text-3xl">Listing results:</h1>
-            <div className="">
+            <div className="grid grid-cols-3 gap-12">
                 {listings.length===0 ? 
                     <h1 className='font-medium text-xl mt-7 text-red-600'>No listing found</h1> 
                 : listings.map((listing)=>(
@@ -181,6 +199,7 @@ const Search = () => {
                     </Link>
                 ))}
             </div>
+            {showMore && <button onClick={onShowMore} className="bg-slate-600 text-white p-3 rounded-lg hover:opacity-90 mt-7">Show more</button>}
         </div>
     </div>
   )

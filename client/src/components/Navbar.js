@@ -40,14 +40,14 @@ const Navbar = () => {
                 </button>
             </form>
             
-            <ul className='flex gap-4'>
+            <ul className='flex gap-4 font-semibold'>
                 <Link to='/'>
                     <li className='hidden sm:inline hover:underline'>Home</li>
                 </Link>
                 
-                <Link to='/about'>
+                {/* <Link to='/about'>
                     <li className='hidden sm:inline hover:underline'>About</li>
-                </Link>
+                </Link> */}
                 
                 <Link to={currentUser ? "/profile" : "login"}>
                     {currentUser ? <img src={currentUser.avatar} alt="profile" className='w-6 h-6 rounded-full object-cover'/> : <li className='hover:underline'>Login</li>}
